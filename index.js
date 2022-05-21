@@ -45,6 +45,13 @@ async function run() {
       return res.send({ success: true, result });
     });
 
+    app.get("/booking", async (req, res) => {
+      const patient = req.query.patient;
+      const query = { patient: patient };
+      const booking = await bookingCollection.find(query).toArray();
+      res.send(booking);
+    });
+
     // This is not the proper way to query
 
     app.get("/available", async (req, res) => {
